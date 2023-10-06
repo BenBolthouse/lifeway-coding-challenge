@@ -1,0 +1,19 @@
+{
+  "name": "lifeway-coding-challenge-web",
+  "version": "0.0.1",
+  "description": "An app for Star Wars characters to meet and mingle...no matter which side you're on!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenBolthouse/lifeway-coding-challenge.git"
+  },
+  "author": "Ben Bolthouse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenBolthouse/lifeway-coding-challenge/issues"
+  },
+  "homepage": "https://github.com/BenBolthouse/lifeway-coding-challenge#readme"
+}
