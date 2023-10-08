@@ -1,23 +1,70 @@
 import { Application, Mapping, Swapi } from "../models";
-import { Configuration, ResourceIdentifier } from "../types";
+import { SwapiConfiguration, ResourceIdentifier } from "../types";
+import { Logger } from "winston";
+import Cache from "../cache";
 
-export default class SwapiGateway {
+type LogMeta = {
+  uri: string
+  caching: boolean
+}
+
+export default class SwapiClient {
   baseUrl: string;
+  logger: Logger;
+  cache?: Cache;
 
-  constructor(configuration: Configuration) {
+  constructor(configuration: SwapiConfiguration, logger: Logger, cache?: Cache) {
     this.baseUrl = configuration.swapiBaseUrl;
+    this.logger = logger;
+    this.cache = cache;
   }
 
-  private async getResource<TResult>(resourceType: Swapi.ResourceType, resourceId: ResourceIdentifier): Promise<TResult> {
-    return await fetch((typeof resourceId === "string") ? resourceId : `${this.baseUrl}/${resourceType}/${resourceId}/`, {
+  private async getResource<TResult>(resourceType: Swapi.ResourceType, resourceId: ResourceIdentifier): Promise<TResult | null> {
+    let result: TResult | null = null;
+
+    const uri = (typeof resourceId === "string") ? resourceId : `${this.baseUrl}/${resourceType}/${resourceId}/`;
+
+    const meta: LogMeta = {
+      caching: !!this.cache,
+      uri,
+    };
+
+    if (this.cache) {
+      result = this.cache.get<TResult>(uri);
+    }
+
+    if (result) {
+      this.logger.debug(`Found resource ${uri} from cache lookup.`, meta);
+      return result;
+    }
+
+    this.logger.debug(`Requesting ${uri}...`, meta);
+
+    result = await fetch(uri, {
       method: "GET",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
     })
-      .then((result) => result.json())
-      .catch(() => null);
+      .then((result) => {
+        this.logger.debug(`Resolved ${uri}.`, meta);
+
+        const resource = result.json();
+
+        if (this.cache) {
+          this.logger.error(`Caching resolved resource ${uri}.`, meta);
+          this.cache.put(uri, resource);
+        }
+
+        return resource;
+      })
+      .catch(() => {
+        this.logger.error("Request to Swapi API failed.", meta);
+        return null;
+      });
+
+    return result;
   }
 
   private async searchResources<TResult>(resourceType: Swapi.ResourceType, searchTerm: string): Promise<TResult[]> {
@@ -38,6 +85,8 @@ export default class SwapiGateway {
     if (!resource) return null;
 
     const person = Mapping.personFromResource(resource);
+
+    console.log(resource);
 
     if (includes !== undefined && includes !== true && includes !== false) {
       if (includes.films) {

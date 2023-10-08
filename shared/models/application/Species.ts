@@ -1,11 +1,12 @@
+import { Includes } from "../../types";
 import { Base } from "./Base";
 import { FilmIncludes } from "./Film";
 import { PersonIncludes } from "./Person";
 
-export type SpeciesIncludes = boolean | {
+export type SpeciesIncludes = Includes<{
   films?: FilmIncludes
   people?: PersonIncludes
-}; // eslint-disable-line
+}>
 
 export interface Species extends Base {
   average_height: string

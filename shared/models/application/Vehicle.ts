@@ -1,10 +1,11 @@
+import { Includes } from "../../types";
 import { Film, FilmIncludes } from "./Film";
 import { Person, PersonIncludes } from "./Person";
 
-export type VehicleIncludes = boolean | {
+export type VehicleIncludes = Includes<{
   pilots?: PersonIncludes
   films?: FilmIncludes
-}
+}>
 
 export interface Vehicle {
   cargoCapacity: string

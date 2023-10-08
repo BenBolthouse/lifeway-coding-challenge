@@ -1,9 +1,10 @@
+import { Includes } from "../../types";
 import { Base } from "./Base";
 import { Person, PersonIncludes } from "./Person";
 
-export type StarshipIncludes = boolean | {
+export type StarshipIncludes = Includes<{
   pilots?: PersonIncludes
-}
+}>
 
 export interface Starship extends Base {
   cargoCapacity: string

@@ -1,15 +1,16 @@
+import { Includes } from "../../types";
 import { Base } from "./Base";
 import { Film, FilmIncludes } from "./Film";
 import { Species, SpeciesIncludes } from "./Species";
 import { Starship, StarshipIncludes } from "./Starship";
 import { Vehicle, VehicleIncludes } from "./Vehicle";
 
-export type PersonIncludes = boolean | {
+export type PersonIncludes = Includes<{
   films?: FilmIncludes
   species?: SpeciesIncludes
   starships?: StarshipIncludes
   vehicles?: VehicleIncludes
-}; // eslint-disable-line
+}>
 
 export interface Person extends Base {
   birthYear: string

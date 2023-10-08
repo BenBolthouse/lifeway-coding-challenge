@@ -1,11 +1,12 @@
+import { Includes } from "../../types";
 import { Base } from "./Base";
 import { Film, FilmIncludes } from "./Film";
 import { Person, PersonIncludes } from "./Person";
 
-export type PlanetIncludes = boolean | {
+export type PlanetIncludes = Includes<{
   residents: PersonIncludes
   films: FilmIncludes
-}
+}>
 
 export interface Planet extends Base {
   climate: string
