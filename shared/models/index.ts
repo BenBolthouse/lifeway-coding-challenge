@@ -1,7 +1,3 @@
-import * as Application from "./application";
-import * as Swapi from "./swapi";
-
-export default {
-  Application,
-  Swapi,
-};
+export * as Application from "./application";
+export * as Swapi from "./swapi";
+export * as Mapping from "./mapping";
