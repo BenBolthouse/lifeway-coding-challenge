@@ -1,4 +1,4 @@
-import { Includes } from "../../types";
+import { Includes, ResourcesResult } from "../../types";
 import { Base } from "./Base";
 import { Person, PersonIncludes } from "./Person";
 import { Species, SpeciesIncludes } from "./Species";
@@ -17,7 +17,7 @@ export interface Film extends Base {
   director: string
   producer: string
   releaseDate: string
-  species: Species[]
-  starships: Starship[]
-  characters: Person[]
+  characters: ResourcesResult<Person>
+  species: ResourcesResult<Species>
+  starships: ResourcesResult<Starship>
 }; // eslint-disable-line

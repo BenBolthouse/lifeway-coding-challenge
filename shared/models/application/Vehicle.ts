@@ -1,4 +1,4 @@
-import { Includes } from "../../types";
+import { Includes, ResourcesResult } from "../../types";
 import { Film, FilmIncludes } from "./Film";
 import { Person, PersonIncludes } from "./Person";
 
@@ -19,6 +19,6 @@ export interface Vehicle {
   name: string
   passengers: string
   vehicleClass: string
-  pilots: Person[]
-  films: Film[]
+  pilots: ResourcesResult<Person>
+  films: ResourcesResult<Film>
 }

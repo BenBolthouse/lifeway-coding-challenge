@@ -1,22 +1,26 @@
-import { Includes } from "../../types";
+import { Includes, ResourceResult, ResourcesResult } from "../../types";
 import { Base } from "./Base";
-import { FilmIncludes } from "./Film";
-import { PersonIncludes } from "./Person";
+import { Film, FilmIncludes } from "./Film";
+import { Person, PersonIncludes } from "./Person";
+import { Planet, PlanetIncludes } from "./Planet";
 
 export type SpeciesIncludes = Includes<{
   films?: FilmIncludes
   people?: PersonIncludes
+  planet?: PlanetIncludes
 }>
 
 export interface Species extends Base {
-  average_height: string
-  average_lifespan: string
+  averageHeight: string
+  averageLifespan: string
   classification: string
   designation: string
-  eye_colors: string
-  hair_colors: string
-  homeworld: string
+  eyeColors: string
+  hairColors: string
   language: string
   name: string
   skin_colors: string
+  films: ResourcesResult<Film>
+  homeworld: ResourceResult<Planet>
+  people: ResourcesResult<Person>
 }; // eslint-disable-line

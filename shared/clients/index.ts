@@ -1,1 +1,1 @@
-export { default as Swapi } from "./SwapiClient";
+export * from "./SwapiClient";

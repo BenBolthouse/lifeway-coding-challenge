@@ -1,4 +1,4 @@
-import { Includes } from "../../types";
+import { Includes, ResourcesResult } from "../../types";
 import { Base } from "./Base";
 import { Film, FilmIncludes } from "./Film";
 import { Person, PersonIncludes } from "./Person";
@@ -18,6 +18,6 @@ export interface Planet extends Base {
   rotationPeriod: string
   surfaceWater: string
   terrain: string
-  residents: Person[]
-  films: Film[]
+  residents: ResourcesResult<Person>
+  films: ResourcesResult<Film>
 }

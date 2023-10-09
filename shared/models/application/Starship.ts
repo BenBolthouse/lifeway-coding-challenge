@@ -1,4 +1,4 @@
-import { Includes } from "../../types";
+import { Includes, ResourcesResult } from "../../types";
 import { Base } from "./Base";
 import { Person, PersonIncludes } from "./Person";
 
@@ -20,5 +20,5 @@ export interface Starship extends Base {
   name: string
   passengers: string
   starshipClass: string
-  pilots: Person[]
+  pilots: ResourcesResult<Person>
 }; // eslint-disable-line
