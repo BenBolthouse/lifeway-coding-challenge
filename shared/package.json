@@ -2,7 +2,7 @@
   "name": "lifeway-coding-challenge-shared",
   "version": "0.1.0",
   "author": "Ben Bolthouse",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BenBolthouse/lifeway-coding-challenge.git"
