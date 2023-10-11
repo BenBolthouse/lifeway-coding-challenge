@@ -30,5 +30,6 @@ export declare class SwapiClient {
     getFilms(filmIds: ResourceIdentifier[], includes?: Application.FilmIncludes): Promise<ResourcesResult<Application.Film>>;
     getSpecie(speciesId: ResourceIdentifier, includes?: Application.SpeciesIncludes): Promise<ResourceResult<Application.Species>>;
     getSpecies(speciesIds: ResourceIdentifier[], includes?: Application.SpeciesIncludes): Promise<ResourcesResult<Application.Species>>;
+    getPlanet(planetId: ResourceIdentifier, includes?: Application.PlanetIncludes): Promise<ResourceResult<Application.Planet>>;
 }
 //# sourceMappingURL=SwapiClient.d.ts.map

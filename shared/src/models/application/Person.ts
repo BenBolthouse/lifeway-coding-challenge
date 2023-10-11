@@ -1,7 +1,7 @@
 import { Includes, ResourceResult, ResourcesResult } from "../../types";
 import { Base } from "./Base";
 import { Film, FilmIncludes } from "./Film";
-import { Planet } from "./Planet";
+import { Planet, PlanetIncludes } from "./Planet";
 import { Species, SpeciesIncludes } from "./Species";
 import { Starship, StarshipIncludes } from "./Starship";
 import { Vehicle, VehicleIncludes } from "./Vehicle";
@@ -12,6 +12,7 @@ export type PersonSearch = {
 
 export type PersonIncludes = Includes<{
   films?: FilmIncludes
+  homeworld?: PlanetIncludes
   species?: SpeciesIncludes
   starships?: StarshipIncludes
   vehicles?: VehicleIncludes

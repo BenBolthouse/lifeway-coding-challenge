@@ -1,21 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Cache = /** @class */ (function () {
-    function Cache() {
-        this.data = {};
-    }
-    Cache.prototype.put = function (key, value) {
+class Cache {
+    data = {};
+    put(key, value) {
         this.data[key] = value;
-    };
-    Cache.prototype.get = function (key) {
+    }
+    get(key) {
         if (this.data[key]) {
             return this.data[key];
         }
         return null;
-    };
-    Cache.prototype.clear = function () {
+    }
+    clear() {
         this.data = {};
-    };
-    return Cache;
-}());
+    }
+}
 exports.default = Cache;

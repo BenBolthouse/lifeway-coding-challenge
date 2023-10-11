@@ -5,7 +5,6 @@
     "sourceRoot": "",
     "outDir": "dist",
     "declaration": true,
-    "emitDeclarationOnly": true,
     "declarationMap": true,
     "target": "esnext",
     "module": "commonjs",

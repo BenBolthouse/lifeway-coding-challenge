@@ -12,7 +12,7 @@
   },
   "homepage": "https://github.com/BenBolthouse/lifeway-coding-challenge#readme",
   "scripts": {
-    "build": "tsc index.js --declaration --allowJs --emitDeclarationOnly"
+    "build:watch": "tsc --watch"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",

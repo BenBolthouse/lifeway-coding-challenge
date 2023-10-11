@@ -141,12 +141,9 @@ export class SwapiClient {
       const person = Mapping.personFromResource(resource);
 
       if (includes !== undefined && includes !== true && includes !== false) {
-        if (includes.films) {
-          person.films = await this.getFilms(resource.films, includes.films);
-        }
-        if (includes.starships) {
-          person.starships = await this.getStarships(resource.starships, includes.starships);
-        }
+        if (includes.films) person.films = await this.getFilms(resource.films, includes.films);
+        if (includes.homeworld) person.homeworld = await this.getPlanet(resource.homeworld, includes.homeworld);
+        if (includes.starships) person.starships = await this.getStarships(resource.starships, includes.starships);
       }
 
       people.push(person);
@@ -227,5 +224,20 @@ export class SwapiClient {
     const species = (await Promise.all(promises)).filter((species) => species !== null);
 
     return species as ResourcesResult<Application.Species>;
+  }
+
+  public async getPlanet(planetId: ResourceIdentifier, includes?: Application.PlanetIncludes): Promise<ResourceResult<Application.Planet>> {
+    const resource = await this.getResource<Swapi.Planet>(Swapi.ResourceType.Planet, planetId);
+
+    if (!resource) return null;
+
+    const planet = Mapping.planetFromResource(resource);
+
+    if (includes !== undefined && includes !== false && includes !== true) {
+      if (includes.films) planet.films = await this.getFilms(resource.films, includes.films);
+      if (includes.residents) planet.residents = await this.getPeople(resource.residents, includes.residents);
+    }
+
+    return planet as ResourceResult<Application.Planet>;
   }
 }

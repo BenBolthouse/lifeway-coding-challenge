@@ -22,13 +22,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cache = exports.Types = exports.Models = exports.Clients = void 0;
-exports.Clients = __importStar(require("./clients"));
-exports.Models = __importStar(require("./models"));
-exports.Types = __importStar(require("./types"));
-var cache_1 = require("./cache");
-Object.defineProperty(exports, "Cache", { enumerable: true, get: function () { return __importDefault(cache_1).default; } });
+exports.planetFromResource = void 0;
+const Utilities = __importStar(require("../../utilities"));
+function planetFromResource(resource) {
+    return {
+        id: Utilities.Resource.getResourceIdFromResourceIdentifier(resource.url),
+        climate: resource.climate,
+        diameter: resource.diameter,
+        gravity: resource.gravity,
+        name: resource.name,
+        orbitalPeriod: resource.orbital_period,
+        population: resource.population,
+        rotationPeriod: resource.rotation_period,
+        surfaceWater: resource.surface_water,
+        terrain: resource.terrain,
+        films: [],
+        residents: [],
+    };
+}
+exports.planetFromResource = planetFromResource;

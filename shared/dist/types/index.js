@@ -15,8 +15,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./Includes"), exports);
-__exportStar(require("./ReactClientConfiguration"), exports);
-__exportStar(require("./ReactHookResourceResult"), exports);
 __exportStar(require("./ResourceGetRequest"), exports);
 __exportStar(require("./ResourceIdentifier"), exports);
 __exportStar(require("./ResourceResult"), exports);

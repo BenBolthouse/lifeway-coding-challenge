@@ -16,5 +16,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./FilmMappers"), exports);
 __exportStar(require("./PersonMapper"), exports);
+__exportStar(require("./PlanetMapper"), exports);
 __exportStar(require("./SpeciesMapper"), exports);
 __exportStar(require("./StarshipMapper"), exports);
