@@ -40,7 +40,7 @@ const TouchOutside = styled.div(() => ({
 }));
 
 export default function AppProvider({ children }: React.PropsWithChildren<{}>) {
-  const [isTouchOutsideReady, setIsTouchOutsideReady] = React.useState<boolean>(true);
+  const [isTouchOutsideReady, setIsTouchOutsideReady] = React.useState<boolean>(false);
   const [touchOutsideCallbacks, setTouchOutsideCallbacks] = React.useState<TouchOutsideCallbackDictionary>({});
 
   function registerTouchOutsideCallback(key: string, callback: TouchOutsideCallback) {

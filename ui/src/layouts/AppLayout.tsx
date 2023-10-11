@@ -2,6 +2,7 @@ import React from "react";
 import SearchSelect from "../components/SearchSelect";
 import StarWarsLogo from "../svg/StarWarsLogo";
 import styled, { createGlobalStyle } from "styled-components";
+import { Outlet } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle(() => ({
   body: {
@@ -73,14 +74,11 @@ const LogoText = styled.span(() => ({
 }));
 
 const Content = styled.main(() => ({
+  display: "grid",
   padding: "1rem",
 }));
 
-type MobileLayoutProps = {
-  content: React.ReactElement
-}
-
-export default function MobileLayout({ content }: MobileLayoutProps) {
+export default function MobileLayout() {
   return (
     <React.Fragment>
       <GlobalStyles />
@@ -96,7 +94,7 @@ export default function MobileLayout({ content }: MobileLayoutProps) {
             </Search>
           </Header>
           <Content>
-            {content}
+            <Outlet />
           </Content>
         </Container>
       </Background>

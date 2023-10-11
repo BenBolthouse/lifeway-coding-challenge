@@ -7,15 +7,22 @@ import {
 import ProfileArea from './areas/ProfileArea';
 import NoContentArea from './areas/NoContentArea';
 import AppProvider from './contexts/AppContext';
+import AppLayout from "./layouts/AppLayout";
 
 const router = createBrowserRouter([
   {
-    path: "profiles",
-    element: <ProfileArea />,
-  },
-  {
-    path: "*",
-    element: <NoContentArea />
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "profiles",
+        element: <ProfileArea />,
+      },
+      {
+        path: "*",
+        element: <NoContentArea />,
+      },
+    ]
   },
 ]);
 

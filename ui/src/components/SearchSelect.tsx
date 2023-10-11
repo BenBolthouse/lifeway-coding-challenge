@@ -55,8 +55,7 @@ const Result = styled.div(() => ({
 }));
 
 const PersonNameText = styled.span(() => ({
-  backgroundColor: "#cbced9",
-  color: "#000000",
+  color: "#19191c",
   display: "block",
   fontSize: "0.825rem",
   fontWeight: "bold",
@@ -66,8 +65,7 @@ const PersonNameText = styled.span(() => ({
 }));
 
 const PersonHomeworldText = styled.span(() => ({
-  backgroundColor: "#cbced9",
-  color: "#000000",
+  color: "#686877",
   display: "block",
   fontSize: "0.825rem",
   fontStyle: "italic",
@@ -78,7 +76,6 @@ const PersonHomeworldText = styled.span(() => ({
 
 const NoResultsText = styled.span(() => ({
   display: "block",
-  backgroundColor: "#cbced9",
   color: "#000000",
   fontSize: "0.825rem",
   fontStyle: "italic",
@@ -93,7 +90,9 @@ export default function SearchSelect() {
   const [value, setValue] = React.useState("");
   const [isFocused, setIsFocused] = React.useState(false);
 
-  const { search, pending, data } = useSearchPeople();
+  const { search, pending, data } = useSearchPeople({
+    homeworld: true,
+  });
 
   React.useEffect(() => {
     let abort = () => undefined as void;
@@ -121,6 +120,11 @@ export default function SearchSelect() {
     });
   }
 
+  function onClickResult() {
+    setIsFocused(false);
+    setValue("");
+  }
+
   return (
     <Anchor>
       <Input onClick={onClickContainer}>
@@ -129,6 +133,7 @@ export default function SearchSelect() {
           icon={IoSearchSharp}
           onChange={onChangeTextInput}
           pending={pending}
+          value={value}
           placeholder="Search..."
         />
       </Input>
@@ -139,16 +144,18 @@ export default function SearchSelect() {
               data.length ? (
                 data.map((person, i) => (
                   <Link key={i} to={`/profiles/${person.id}`}>
-                    <Result>
+                    <Result onClick={onClickResult}>
                       <PersonNameText>
                         {person.name}
                       </PersonNameText>
-                      <PersonHomeworldText>
-                        Tatooine
-                      </PersonHomeworldText>
+                      {person.homeworld?.name &&
+                        <PersonHomeworldText>
+                          {person.homeworld.name}
+                        </PersonHomeworldText>
+                      }
                       <IoPersonSharp
                         size={"1rem"}
-                        color="#3e3f45"
+                        color="#6d6d77"
                         style={{
                           alignSelf: "center",
                           justifySelf: "center",

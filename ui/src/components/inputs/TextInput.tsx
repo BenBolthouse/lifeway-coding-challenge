@@ -15,6 +15,7 @@ type InputProps<TInput> = {
   onFocus?: () => void
   onBlur?: () => void
   onChange?: (evt: React.ChangeEvent<TInput>) => void
+  value: string
 }
 
 const Container = styled.div((props) => ({
@@ -59,7 +60,6 @@ export default function TextInput({ icon: Icon, ...props }: InputProps<HTMLInput
 
   const [focused, setFocused] = React.useState(false);
   const [blurred, setBlurred] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   function onFocus() {
     props.onFocus && props.onFocus();
@@ -75,7 +75,6 @@ export default function TextInput({ icon: Icon, ...props }: InputProps<HTMLInput
 
   function onChange(evt: React.ChangeEvent<HTMLInputElement>) {
     props.onChange && props.onChange(evt);
-    setValue(evt.target.value)
   }
 
   const iconOpacity = focused ? 1 : 0.5;
@@ -90,7 +89,7 @@ export default function TextInput({ icon: Icon, ...props }: InputProps<HTMLInput
     >
       <Input
         type="text"
-        value={value}
+        value={props.value}
         onFocus={onFocus}
         onBlur={onBlur}
         onChange={onChange}
