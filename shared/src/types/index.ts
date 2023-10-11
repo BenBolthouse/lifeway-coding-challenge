@@ -1,6 +1,4 @@
 export * from "./Includes";
-export * from "./ReactClientConfiguration";
-export * from "./ReactHookResourceResult";
 export * from "./ResourceGetRequest";
 export * from "./ResourceIdentifier";
 export * from "./ResourceResult";
