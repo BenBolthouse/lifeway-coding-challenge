@@ -1,0 +1,1 @@
+{"version":3,"file":"PagedResults.d.ts","sourceRoot":"","sources":["../../../src/models/swapi/PagedResults.ts"],"names":[],"mappings":"AAOA,MAAM,CAAC,OAAO,WAAW,YAAY,CAAC,CAAC;IACrC,KAAK,EAAE,MAAM,CAAC;IACd,IAAI,CAAC,EAAE,MAAM,CAAC;IACd,QAAQ,EAAE,MAAM,CAAC;IACjB,OAAO,EAAE,CAAC,EAAE,CAAC;CACd"}

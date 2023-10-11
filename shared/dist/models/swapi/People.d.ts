@@ -14,3 +14,4 @@ export default interface People extends Resource {
     starships: ResourceUrl[];
     vehicles: ResourceUrl[];
 }
+//# sourceMappingURL=People.d.ts.map

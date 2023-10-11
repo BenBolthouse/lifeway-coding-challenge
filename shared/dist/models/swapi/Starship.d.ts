@@ -16,3 +16,4 @@ export default interface Starship extends Resource {
     pilots: ResourceUrl[];
     films: ResourceUrl[];
 }
+//# sourceMappingURL=Starship.d.ts.map

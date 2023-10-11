@@ -19,3 +19,4 @@ export interface Film extends Base {
     species: ResourcesResult<Species>;
     starships: ResourcesResult<Starship>;
 }
+//# sourceMappingURL=Film.d.ts.map

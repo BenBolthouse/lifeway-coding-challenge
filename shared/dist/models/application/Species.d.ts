@@ -22,3 +22,4 @@ export interface Species extends Base {
     homeworld: ResourceResult<Planet>;
     people: ResourcesResult<Person>;
 }
+//# sourceMappingURL=Species.d.ts.map

@@ -13,3 +13,4 @@ export default interface Species extends Resource {
     people: ResourceUrl[];
     films: ResourceUrl[];
 }
+//# sourceMappingURL=Species.d.ts.map

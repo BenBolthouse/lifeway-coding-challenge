@@ -20,3 +20,4 @@ export interface Starship extends Base {
     starshipClass: string;
     pilots: ResourcesResult<Person>;
 }
+//# sourceMappingURL=Starship.d.ts.map

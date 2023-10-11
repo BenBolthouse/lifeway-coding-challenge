@@ -29,3 +29,4 @@ export interface Person extends Base {
     starships: ResourcesResult<Starship>;
     vehicles: ResourcesResult<Vehicle>;
 }
+//# sourceMappingURL=Person.d.ts.map

@@ -4,3 +4,4 @@ export default class Cache {
     get<TModel>(key: string): TModel | null;
     clear(): void;
 }
+//# sourceMappingURL=index.d.ts.map

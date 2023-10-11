@@ -20,3 +20,4 @@ export interface Vehicle {
     pilots: ResourcesResult<Person>;
     films: ResourcesResult<Film>;
 }
+//# sourceMappingURL=Vehicle.d.ts.map

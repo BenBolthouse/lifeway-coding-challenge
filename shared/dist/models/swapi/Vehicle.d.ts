@@ -14,3 +14,4 @@ export default interface Vehicle extends Resource {
     pilots: ResourceUrl[];
     films: ResourceUrl[];
 }
+//# sourceMappingURL=Vehicle.d.ts.map

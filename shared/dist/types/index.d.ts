@@ -1,9 +1,8 @@
 export * from "./Includes";
-export * from "./ReactClientConfiguration";
-export * from "./ReactHookResourceResult";
 export * from "./ResourceGetRequest";
 export * from "./ResourceIdentifier";
 export * from "./ResourceResult";
 export * from "./ResourcesResult";
 export * from "./ResourcesSearchRequest";
 export * from "./SwapiClientConfiguration";
+//# sourceMappingURL=index.d.ts.map

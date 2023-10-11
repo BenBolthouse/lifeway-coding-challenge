@@ -24,3 +24,4 @@ export default interface Resource {
      */
     edited: string;
 }
+//# sourceMappingURL=Base.d.ts.map

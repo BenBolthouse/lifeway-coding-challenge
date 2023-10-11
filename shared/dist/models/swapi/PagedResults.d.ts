@@ -4,3 +4,4 @@ export default interface PagedResults<T> {
     previous: string;
     results: T[];
 }
+//# sourceMappingURL=PagedResults.d.ts.map

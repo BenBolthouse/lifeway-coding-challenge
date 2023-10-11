@@ -12,3 +12,4 @@ export default interface Planet extends Resource {
     residents: ResourceUrl[];
     films: ResourceUrl[];
 }
+//# sourceMappingURL=Planet.d.ts.map

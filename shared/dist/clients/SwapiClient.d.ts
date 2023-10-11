@@ -31,3 +31,4 @@ export declare class SwapiClient {
     getSpecie(speciesId: ResourceIdentifier, includes?: Application.SpeciesIncludes): Promise<ResourceResult<Application.Species>>;
     getSpecies(speciesIds: ResourceIdentifier[], includes?: Application.SpeciesIncludes): Promise<ResourcesResult<Application.Species>>;
 }
+//# sourceMappingURL=SwapiClient.d.ts.map

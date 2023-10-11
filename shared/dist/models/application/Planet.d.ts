@@ -19,3 +19,4 @@ export interface Planet extends Base {
     residents: ResourcesResult<Person>;
     films: ResourcesResult<Film>;
 }
+//# sourceMappingURL=Planet.d.ts.map

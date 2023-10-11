@@ -12,3 +12,4 @@ export default interface Film extends Resource {
     vehicles: ResourceUrl[];
     species: ResourceUrl[];
 }
+//# sourceMappingURL=Film.d.ts.map

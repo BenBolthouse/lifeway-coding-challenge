@@ -7,3 +7,4 @@ export type { default as Planet } from "./Planet";
 export type { default as Species } from "./Species";
 export type { default as Starship } from "./Starship";
 export type { default as Vehicle } from "./Vehicle";
+//# sourceMappingURL=index.d.ts.map
