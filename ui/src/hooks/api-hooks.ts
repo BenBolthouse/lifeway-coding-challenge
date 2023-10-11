@@ -1,14 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Models, Types } from "lifeway-coding-challenge-shared";
 
-export function useGetResource<TModel, TIncludes>(resourceType: Models.Swapi.ResourceType, id: number, includes?: TIncludes): Types.ReactHookResourceResult<Types.ResourceResult<TModel>> {
-  const [pending, setPending] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [data, setData] = useState<unknown>(null);
+type UseGetResource<TResource> = {
+  get: (id: number) => () => void
+  pending: boolean
+  error: boolean
+  data: Types.ResourceResult<TResource>
+}
 
-  React.useEffect(() => {
+type UseSearchResource<TResource> = {
+  search: (searchTerm: string) => () => void
+  pending: boolean
+  error: boolean
+  data: Types.ResourcesResult<TResource>
+}
+
+export function useGetResource<TModel, TIncludes>(resourceType: Models.Swapi.ResourceType, id?: number, includes?: TIncludes): UseGetResource<TModel> {
+  const [pending, setPending] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<boolean>(false);
+  const [data, setData] = React.useState<unknown>(null);
+
+  function get(id: number) {
     const abortController = new AbortController();
 
     setPending(true);
@@ -27,9 +41,13 @@ export function useGetResource<TModel, TIncludes>(resourceType: Models.Swapi.Res
       signal: abortController.signal,
     })
       .then((result) => {
-        setData(result.json());
-        setError(false);
-        setPending(false);
+        result
+          .json()
+          .then((newData) => {
+            setData(newData);
+            setError(false);
+            setPending(false);
+          });
       })
       .catch(() => {
         setData(null);
@@ -37,23 +55,30 @@ export function useGetResource<TModel, TIncludes>(resourceType: Models.Swapi.Res
         setPending(false);
       });
 
-    return () => abortController.abort();
-  }, []);
+      return () => abortController.abort();
+  }
 
-  return [
+  useEffect(() => {id && get(id)}, [id])
+
+  return {
+    get,
     pending,
     error,
-    data as Types.ResourceResult<TModel>,
-  ];
+    data: data as Types.ResourceResult<TModel>,
+  };
 }
 
-export function useSearchResources<TModel, TIncludes>(resourceType: Models.Swapi.ResourceType, searchTerm: string, includes?: TIncludes): Types.ReactHookResourceResult<Types.ResourcesResult<TModel>> {
-  const [pending, setPending] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [data, setData] = useState<unknown>(null);
+export function useSearchResources<TModel, TIncludes>(resourceType: Models.Swapi.ResourceType, includes?: TIncludes): UseSearchResource<TModel> {
+  const [pending, setPending] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<boolean>(false);
+  const [data, setData] = React.useState<unknown>(null);
 
-  React.useEffect(() => {
+  function search(searchTerm: string) {
     const abortController = new AbortController();
+
+    const result = () => abortController.abort();
+
+    if (searchTerm === "") return result;
 
     setPending(true);
 
@@ -72,9 +97,13 @@ export function useSearchResources<TModel, TIncludes>(resourceType: Models.Swapi
       signal: abortController.signal,
     })
       .then((result) => {
-        setData(result.json());
-        setError(false);
-        setPending(false);
+        result
+          .json()
+          .then((newData) => {
+            setData(newData);
+            setError(false);
+            setPending(false);
+          });
       })
       .catch(() => {
         setData(null);
@@ -82,16 +111,15 @@ export function useSearchResources<TModel, TIncludes>(resourceType: Models.Swapi
         setPending(false);
       });
 
-    return () => abortController.abort();
-  }, [
-    searchTerm,
-  ])
+      return result;
+  }
 
-  return [
+  return {
+    search,
     pending,
     error,
-    data as Types.ResourcesResult<TModel>,
-  ];
+    data: data as Types.ResourcesResult<TModel>,
+  };
 }
 
 /**
@@ -100,7 +128,7 @@ export function useSearchResources<TModel, TIncludes>(resourceType: Models.Swapi
  *
  * @param includes Includes object to model the response.
  */
-export function useGetPerson(id: number, includes?: Models.Application.PersonIncludes): Types.ReactHookResourceResult<Types.ResourceResult<Models.Application.Person>> {
+export function useGetPerson(id?: number, includes?: Models.Application.PersonIncludes): UseGetResource<Models.Application.Person> {
   return useGetResource(Models.Swapi.ResourceType.People, id, includes);
 }
 
@@ -110,6 +138,6 @@ export function useGetPerson(id: number, includes?: Models.Application.PersonInc
  *
  * @param includes Includes object to model the response.
  */
-export function useSearchPeople(searchTerm: string, includes?: Models.Application.PersonIncludes): Types.ReactHookResourceResult<Types.ResourcesResult<Models.Application.Person>> {
-  return useSearchResources(Models.Swapi.ResourceType.People, searchTerm, includes);
+export function useSearchPeople(includes?: Models.Application.PersonIncludes): UseSearchResource<Models.Application.Person> {
+  return useSearchResources(Models.Swapi.ResourceType.People, includes);
 }
