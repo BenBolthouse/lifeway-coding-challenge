@@ -2,7 +2,7 @@ import React from "react";
 import { AppContext } from "../contexts/AppContext";
 import { IoPersonSharp, IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useSearchPeople } from "../hooks/api-hooks";
+import { useSearchPeople } from "../hooks/data-hooks";
 import styled from "styled-components"
 import TextInput from "./inputs/TextInput";
 
@@ -43,8 +43,8 @@ const Results = styled.div(() => ({
 const Result = styled.div(() => ({
   backgroundColor: "#cbced9",
   borderTop: "1px solid #acb1c5",
-  height: "srem",
-  lineHeight: "srem",
+  height: "2rem",
+  lineHeight: "2rem",
   paddingTop: "0.25rem",
   paddingRight: "0.5rem",
   paddingLeft: "0.5rem",
@@ -89,8 +89,7 @@ export default function SearchSelect() {
 
   const [value, setValue] = React.useState("");
   const [isFocused, setIsFocused] = React.useState(false);
-
-  const { search, pending, data } = useSearchPeople({
+  const [search, data, pending] = useSearchPeople({
     homeworld: true,
   });
 
@@ -115,14 +114,13 @@ export default function SearchSelect() {
 
   function onClickContainer() {
     setIsFocused(true);
-    appContext.registerTouchOutsideCallback("search-select-cb", () => {
-      setIsFocused(false);
-    });
+    appContext.enableClickOutside(() => setIsFocused(false));
   }
 
   function onClickResult() {
     setIsFocused(false);
     setValue("");
+    appContext.disableClickOutside();
   }
 
   return (
@@ -138,28 +136,28 @@ export default function SearchSelect() {
         />
       </Input>
       <Results>
-        {data && isFocused &&
+        {isFocused && data &&
           <React.Fragment>
             {
-              data.length ? (
+              data?.length ? (
                 data.map((person, i) => (
-                  <Link key={i} to={`/profiles/${person.id}`}>
-                    <Result onClick={onClickResult}>
+                  <Link
+                    key={i}
+                    to={`/profiles/${person.id}`}
+                  >
+                    <Result
+                      onClick={onClickResult}
+                    >
                       <PersonNameText>
                         {person.name}
                       </PersonNameText>
-                      {person.homeworld?.name &&
-                        <PersonHomeworldText>
-                          {person.homeworld.name}
-                        </PersonHomeworldText>
-                      }
+                      <PersonHomeworldText>
+                        {person.homeworld?.name || "unknown"}
+                      </PersonHomeworldText>
                       <IoPersonSharp
                         size={"1rem"}
                         color="#6d6d77"
-                        style={{
-                          alignSelf: "center",
-                          justifySelf: "center",
-                        }}
+                        style={{ placeSelf: "center" }}
                       />
                     </Result>
                   </Link>

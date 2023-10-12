@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: "profiles",
+        path: "profiles/:personId",
         element: <ProfileArea />,
       },
       {

@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle(() => ({
 }))
 
 const Background = styled.div(() => ({
-  backgroundColor: "#26272b",
+  backgroundColor: "#1b1e29",
   height: "100vh",
   width: "100vw",
   display: "grid",
@@ -29,7 +29,7 @@ const Container = styled.div(() => ({
 }))
 
 const Header = styled.header(() => ({
-  backgroundColor: "#393a3f",
+  backgroundColor: "#2d2d39",
   padding: "1rem",
   display: "grid",
   "@media screen and (min-width: 0px)": {

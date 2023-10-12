@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-type TouchOutsideCallback = () => void
-
-type TouchOutsideCallbackDictionary = { [key: string]: TouchOutsideCallback }
+type ClickOutsideCallback = () => void
 
 type AppContextState = {
-  registerTouchOutsideCallback: (key: string, callback: TouchOutsideCallback) => void
+  enableClickOutside: (callback?: ClickOutsideCallback) => void
+  disableClickOutside: () => void
 }
 
 const initialState: AppContextState = {
-  registerTouchOutsideCallback: () => { }
+  enableClickOutside: () => null,
+  disableClickOutside: () => null,
 }
 
 export const AppContext = React.createContext<AppContextState>(initialState);
@@ -30,8 +30,9 @@ const Children = styled.div(() => ({
   left: 0,
 }));
 
-const TouchOutside = styled.div(() => ({
+const ClickOutside = styled.div(() => ({
   position: "absolute",
+  backgroundColor: "#1c1f29bf",
   top: 0,
   right: 0,
   bottom: 0,
@@ -40,32 +41,30 @@ const TouchOutside = styled.div(() => ({
 }));
 
 export default function AppProvider({ children }: React.PropsWithChildren<{}>) {
-  const [isTouchOutsideReady, setIsTouchOutsideReady] = React.useState<boolean>(false);
-  const [touchOutsideCallbacks, setTouchOutsideCallbacks] = React.useState<TouchOutsideCallbackDictionary>({});
+  const [isClickOutsideVisible, setIsClickOutsideVisible] = React.useState<boolean>(false);
+  const [clickOutsideCallbacks, setClickOutsideCallbacks] = React.useState<ClickOutsideCallback[]>([]);
 
-  function registerTouchOutsideCallback(key: string, callback: TouchOutsideCallback) {
-    setIsTouchOutsideReady(true);
-
-    if (!touchOutsideCallbacks[key]) {
-      setTouchOutsideCallbacks((state) => ({ ...state, [key]: callback }));
-    }
+  function enableClickOutside(callback?: ClickOutsideCallback) {
+    setIsClickOutsideVisible(true);
+    callback && setClickOutsideCallbacks([...clickOutsideCallbacks, callback]);
   }
 
-  function onTouchOutside() {
-    Object.values(touchOutsideCallbacks).forEach((callback) => callback());
-    setTouchOutsideCallbacks({});
-    setIsTouchOutsideReady(false);
+  function disableClickOutside() {
+    clickOutsideCallbacks.forEach((callback) => callback());
+    setIsClickOutsideVisible(false);
+    setClickOutsideCallbacks([]);
   }
 
   const value = {
-    registerTouchOutsideCallback,
+    enableClickOutside,
+    disableClickOutside,
   }
 
   return (
     <Container>
       <AppContext.Provider value={value}>
-        {isTouchOutsideReady &&
-          <TouchOutside onClick={onTouchOutside} />
+        {isClickOutsideVisible &&
+          <ClickOutside onClick={disableClickOutside} />
         }
         <Children>
           {children}

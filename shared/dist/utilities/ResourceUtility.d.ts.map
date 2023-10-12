@@ -1,1 +1,1 @@
-{"version":3,"file":"ResourceUtility.d.ts","sourceRoot":"","sources":["../../src/utilities/ResourceUtility.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,kBAAkB,EAAE,MAAM,UAAU,CAAC;AAE9C,wBAAgB,mCAAmC,CAAC,kBAAkB,EAAE,kBAAkB,GAAG,MAAM,CASlG"}
+{"version":3,"file":"ResourceUtility.d.ts","sourceRoot":"","sources":["../../src/utilities/ResourceUtility.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,kBAAkB,EAAE,MAAM,UAAU,CAAC;AAE9C;;GAEG;AACH,wBAAgB,mCAAmC,CAAC,kBAAkB,EAAE,kBAAkB,GAAG,MAAM,CASlG"}

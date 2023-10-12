@@ -94,10 +94,12 @@ class SwapiClient {
         if (includes !== undefined && includes !== false && includes !== true) {
             if (includes.films)
                 person.films = await this.getFilms(resource.films, includes.films);
-            if (includes.starships)
-                person.starships = await this.getStarships(resource.starships, includes.starships);
+            if (includes.homeworld)
+                person.homeworld = await this.getPlanet(resource.homeworld, includes.homeworld);
             if (includes.species)
                 person.species = await this.getSpecies(resource.species, includes.species);
+            if (includes.starships)
+                person.starships = await this.getStarships(resource.starships, includes.starships);
         }
         return person;
     }
@@ -117,6 +119,8 @@ class SwapiClient {
                     person.films = await this.getFilms(resource.films, includes.films);
                 if (includes.homeworld)
                     person.homeworld = await this.getPlanet(resource.homeworld, includes.homeworld);
+                if (includes.species)
+                    person.species = await this.getSpecies(resource.species, includes.species);
                 if (includes.starships)
                     person.starships = await this.getStarships(resource.starships, includes.starships);
             }

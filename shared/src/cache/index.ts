@@ -1,8 +1,9 @@
 export default class Cache {
   private data: Record<string, unknown> = {};
 
-  public put(key: string, value: unknown): undefined {
+  public put(key: string, value: unknown): void {
     this.data[key] = value;
+    return;
   }
 
   public get<TModel>(key: string): TModel | null {
